@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      //Lecture 4 - Create simple reusable component
+
+      const rootElement = document.getElementById('root')
+      const helloWorld = <div>Hello World</div>
+      const message = (props) => <div>{props.msg}</div>
+      const element = (
+          <div className="container">
+              {helloWorld}
+              {helloWorld}
+              {message({msg: 'Hello Zoki'})}
+              {React.createElement(message , {msg: 'Hello Aks'})}
+              <Message1 msg="Hello Jeka" />
+          </div>
+      )
+
+      // Best way
+      // Create new component as function
+      const Message1 = (props) => <div>{props.children}</div>
+
+      const element1 = (
+          <Message1>
+            <p>Dobar vam dan</p>
+            <Message1>zelim!!!</Message1>
+          </Message1>
+      )
+
+      ReactDOM.render(
+          element1 , rootElement
+      )
+    </script>
+  </body>
+</html>
