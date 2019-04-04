@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      //Lecture 2 - Create HTML elements with React's createElement API
+
+      const rootElement = document.getElementById('root');
+      // const element = React.createElement('div', { // in the object we pass props
+      //     className: 'container',
+      //     children: 'Hello World!'
+      //     //children: ['Hello', ' world'] // ili moze i ovako ako treba vise
+      // });
+
+      // Lecture 3 - Convert createElement to JSX
+      const content = 'Inside curly braces we are in JS land and we can do anything';
+      const classContainer = 'container';
+      const element = <div className={classContainer + ' container--first'}>{(() => content)()}</div>;
+
+      console.log(element);
+
+      // or we can do it more easier with PROPS
+      const elementProps2 = {
+          className: 'container2',
+          children: 'Hello World'
+      };
+      // override with props, just place them behind className in this example
+      const element2 = <div className="container--overrides--byProps" {...elementProps2}/>;
+      // or override passed PROPS by placing something else behind them
+      const element3 = <div {...elementProps2} className="container--override-props" children="Hello Zoran" />;
+      // or using enclosing DIV to add children
+      const element4 = <div {...elementProps2} className="container--override-props">Hello Zoki</div>;
+      console.log(element2);
+
+      ReactDOM.render(
+          [element, element2, element3, element4], rootElement
+      );
+    </script>
+  </body>
+</html>
