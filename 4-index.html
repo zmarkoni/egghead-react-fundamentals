@@ -15,29 +15,30 @@
       const rootElement = document.getElementById('root')
       const helloWorld = <div>Hello World</div>
       const message = (props) => <div>{props.msg}</div>
+      const Message1 = (props) => <div>{props.children}</div>
       const element = (
           <div className="container">
               {helloWorld}
               {helloWorld}
               {message({msg: 'Hello Zoki'})}
-              {React.createElement(message , {msg: 'Hello Aks'})}
+              {React.createElement(message, {msg: 'Hello Aks'})}
               <Message1 msg="Hello Jeka" />
           </div>
       )
 
       // Best way
       // Create new component as function
-      const Message1 = (props) => <div>{props.children}</div>
+      const Message2 = (props) => <div>{props.children}</div>
 
-      const element1 = (
-          <Message1>
+      const element2 = (
+          <Message2>
             <p>Dobar vam dan</p>
-            <Message1>zelim!!!</Message1>
-          </Message1>
+            <Message2>zelim!!!</Message2>
+          </Message2>
       )
 
       ReactDOM.render(
-          element1 , rootElement
+          element2 , rootElement
       )
     </script>
   </body>
