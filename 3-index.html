@@ -22,9 +22,11 @@
       // Lecture 3 - Convert createElement to JSX
       const content = 'Inside curly braces we are in JS land and we can do anything';
       const classContainer = 'container';
-      const element = <div className={classContainer + ' container--first'}>{(() => content)()}</div>;
+      const element1 = <div className={classContainer + ' container--first'}>{content}</div>;
+      const element11 = <div className={classContainer + ' container--first'}>{(() => content)()}</div>; // moze i funkcija
 
-      console.log(element);
+      console.log(element1);
+      console.log(element11);
 
       // or we can do it more easier with PROPS
       const elementProps2 = {
@@ -40,7 +42,7 @@
       console.log(element2);
 
       ReactDOM.render(
-          [element, element2, element3, element4], rootElement
+          [element1, element11, element2, element3, element4], rootElement
       );
     </script>
   </body>
