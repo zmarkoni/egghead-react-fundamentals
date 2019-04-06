@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      //Lecture 5 - Validate custom react components Props with PropsTypes
+
+      const rootElement = document.getElementById('root')
+
+      function SayHello(props) {
+          return (
+              <div>
+                  Hello {props.firstName} {props.lastName}!
+              </div>
+          )
+      }
+      // We can add validator PropTypes to test our props ( what is passed to them)
+      // src="https://unpkg.com/prop-types@15.6.1/prop-types.js"
+      // koristi se tako sto se doda na funkciju i kreira objekat gde odredjujemo tip props-a
+      // If prop is not provided the validator(PropTypes) does not run!
+      SayHello.propTypes = { // ovde pocinje sa malim slovom => propTypes
+          firstName: PropTypes.string.isRequired,
+          lastName: PropTypes.string.isRequired,
+      }
+
+      ReactDOM.render(
+          <SayHello firstName={true} />, rootElement
+      )
+    </script>
+  </body>
+</html>
