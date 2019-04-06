@@ -13,10 +13,38 @@
     <script type="text/babel">
       //Lecture 6 - Conditionally render a React component
 
-      const rootElement = document.getElementById('root')
+      const rootElement = document.getElementById('root');
 
-      function Message({message}) { // moze i props.message, ali je ovako krace {message}
+      function Message1({message}) {
+        if(!message) {
+            return <div>No message</div>
+        }
+        return <div>{message}</div>
+      }
 
+      // isto kao i ovo gore samo u JSX
+      function Message2({message}) {
+          return message
+                  ? React.createElement('div', null, message)
+                  : React.createElement('div', null, 'No message')
+      }
+
+      // ili ako hocu da vrapujem sve u DIV onda moram da dodam
+      // return (  , ovo moze da se doda za svaki return
+      // i div {  we need to interpolate JS with {}
+      function Message3({message}) {
+          return (   // bitno return (
+              <div>
+                  {message
+                      ? React.createElement('div', null, message)
+                      : React.createElement('div', null, 'No message')
+                  }
+              </div>
+          )
+      }
+
+      // Best way
+      function Message4({message}) { // moze i props.message, ali je ovako krace {message}
           return (
               <div>
                   {message
@@ -28,7 +56,12 @@
       }
 
       ReactDOM.render(
-          <Message message={'Hi Zoki'}/>,
+          [
+          <Message1 message={'Hi Zoki 1'}/>,
+          <Message2 message={'Hi Zoki 2'}/>,
+          <Message3 message={'Hi Zoki 3'}/>,
+          <Message4 message={'Hi Zoki 4'}/>
+          ],
           rootElement
       )
     </script>
