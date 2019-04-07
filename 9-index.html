@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+
+    <div id="root"></div>
+    <script type="text/babel">
+      //Lecture 9 - Use Event Handlers with React
+      const rootElement = document.getElementById('root');
+
+      const state = {eventCount: 0, username: ''}
+
+
+          function increment() {
+            setState({ eventCount: state.eventCount +1
+            })
+          }
+
+          function updateUsername(event) {
+            setState({
+              username: event.target.value
+            })
+          }
+
+          function App() {
+            return (
+              <div>
+                <p>
+                  There have been {state.eventCount} events.
+                </p>
+                <p>
+                  <button onClick={increment}>
+                    Click Me
+                  </button>
+                </p>
+                <p>You typed: {state.username}</p>
+                <p>
+                  <input onBlur={updateUsername} />
+                </p>
+              </div>
+            )
+          }
+
+          function setState(newState) {
+            Object.assign(state, newState)
+            renderApp()
+          }
+
+          function renderApp() {
+            ReactDOM.render(
+              <App />,
+              document.getElementById('root')
+            )
+          }
+
+          renderApp()
+          setState({eventCount: 10})
+    </script>
+  </body>
+</html>
