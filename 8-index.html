@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+      <style>
+            .box {
+              border: 1px solid #333;
+            }
+            .box--large {
+              width: 180px;
+              height: 180px;
+            }
+            .box--medium {
+              width: 120px;
+              height: 120px;
+            }
+            .box--small {
+              width: 60px;
+              height: 60px;
+            }
+      </style>
+
+    <div id="root"></div>
+    <script type="text/babel">
+      //Lecture 8 - Style React Components with className and In-Line Styles
+      const rootElement = document.getElementById('root');
+
+      const element1 = (
+          <div>
+              <div
+                  style={{paddingLeft: 20}}
+                  className="box box--small"
+              >
+                  box
+              </div>
+          </div>
+      )
+
+      // ili mozemo da izvucemo props napolje i napisemo ovako
+      const className = "box box--small";
+      const props = {
+            className,
+            style: {paddingLeft: 20},
+        }
+      const element2 = (
+        <div>
+            <div {...props}>box</div>
+        </div>
+    )
+      
+    // Sada mozemo da odvojimo stil od elementa - destructuring
+      function Box({style, className = '', size, ...rest}) {
+          const sizeClassName = size ? `box--${size}` : '';
+          return (
+              <div
+                style={{paddingLeft: 20, ...style}}
+                className={`box ${className} ${sizeClassName}`}
+                {...rest}
+           />
+          )
+      }
+
+      const element3 = (
+          <div>
+              <Box
+                  size="small"
+                  style={{backgroundColor: 'lightblue'}}>
+                  small box
+              </Box>
+
+              <Box
+                  size="medium"
+                  style={{backgroundColor: 'pink'}}>
+                  medium box
+              </Box>
+
+              <Box
+                  className="box--large"
+                  size="large (ovako je bolje nego sa className)"
+                  style={{backgroundColor: 'orange'}}>
+                  large box
+              </Box>
+          </div>
+      )
+
+      ReactDOM.render(element3, rootElement);
+
+    </script>
+  </body>
+</html>
