@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<style>
+    .buttonStyles {
+        border: 1px solid #ccc;
+        background: #fff;
+        font-size: 2em;
+        padding: 15px;
+        margin: 5px;
+        width: 200px;
+    }
+
+    .labelStyles {
+        font-size: 5em;
+        display: block;
+    }
+
+    .divStyles {
+        text-align: center;
+    }
+</style>
+<div id="root"></div>
+<script type="text/babel">
+    //Lecture 10 - Use Component State with React
+
+    const rootElement = document.getElementById('root');
+
+
+    // Step1
+    // Instead of function we will us class
+    /*
+    function StopWatch({lapse, running}) {
+        return (
+            <div className="divStyles">
+                <label className="labelStyles">{lapse}ms</label>
+                <button className="buttonStyles">{running ? 'Stop' : 'Start'}</button>
+                <button className="buttonStyles">Clear</button>
+            </div>
+        )
+    }
+    */
+
+    class StopWatch extends React.Component {
+        state = {
+            lapse: 0,
+            running: false
+        }
+
+        handleRunClick = () => {
+            this.setState(state => {
+                if (this.state.running) {
+                    console.log(this.timer);
+                    clearInterval(this.timer);
+                } else {
+                    //console.log(this.state.lapse);
+                    const startTime = Date.now() - this.state.lapse;
+                    this.timer = setInterval(() => {
+                        this.setState({
+                            lapse: Date.now() - startTime
+                        })
+                    })
+                }
+                return {running: !this.state.running}
+            })
+        }
+
+        handleClearClick = () => {
+            clearInterval(this.timer);
+            this.setState(
+                {
+                    lapse: 0,
+                    running: false
+                }
+            )
+        }
+
+        render() {
+            // Step2 So instead pulling from PROPS we can use State which is defined before Render
+            // const {running, lapse} = this.props;
+            const {running, lapse} = this.state;
+
+            // Step 3, make button dynamic, add eventHandlers
+            return (
+                <div className="divStyles">
+                    <label className="labelStyles">{lapse}ms</label>
+                    <button className="buttonStyles" onClick={this.handleRunClick}>
+                        {running ? 'Stop' : 'Start'}
+                    </button>
+                    <button className="buttonStyles" onClick={this.handleClearClick}>
+                        Clear
+                    </button>
+                </div>
+            )
+        }
+    }
+
+    // Step 2 We can remove PROPS from our element, since we will use State
+    // const element = <StopWatch running={true} lapse={100} />
+    const element = <StopWatch/>
+
+    ReactDOM.render(
+        element,
+        rootElement
+    )
+
+</script>
+</body>
+</html>
