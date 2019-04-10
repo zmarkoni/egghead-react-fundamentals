@@ -57,19 +57,19 @@
 
         handleRunClick = () => {
             this.setState(state => {
-                if (this.state.running) {
+                if (state.running) {
                     console.log(this.timer);
                     clearInterval(this.timer);
                 } else {
-                    //console.log(this.state.lapse);
-                    const startTime = Date.now() - this.state.lapse;
+                    //console.log(state.lapse);
+                    const startTime = Date.now() - state.lapse;
                     this.timer = setInterval(() => {
                         this.setState({
                             lapse: Date.now() - startTime
                         })
                     })
                 }
-                return {running: !this.state.running}
+                return {running: !state.running}
             })
         }
 
