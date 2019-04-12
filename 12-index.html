@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<style>
+    .buttonStyles {
+        border: 4px solid #000;
+        background: #ccc;
+        font-size: 2em;
+        padding: 15px;
+        margin: 5px;
+        width: 200px;
+    }
+
+    .labelStyles {
+        font-size: 5em;
+        display: block;
+    }
+
+    .divStyles {
+        text-align: center;
+    }
+</style>
+<div id="root"></div>
+<script type="text/babel">
+    //Lecture 12 - Use Class Components with React
+
+    const rootElement = document.getElementById('root');
+
+    class Counter extends React.Component {
+
+        /* Ovo je defalt constructor i mozemo da radimo bez njega kada koristimo PUBLIC CLASS Fields
+        constructor(...args) {
+            super(...args)
+
+        this.state = {count: 0}   // using PUBLIC CLASS fields out of constructor
+
+        this.handleClick = this.handleClick.bind(this); moze i prostije ako koristimo PUBLIC CLASS fields
+        this.handleClick pointuje na metod u reaktu, a ovaj drugi this.handleClick.bind(this) je button
+        }
+        */
+
+        // using PUBLIC CLASS fields out of constructor
+        state = {count: 0};
+        // handleClick = this.handleClick.bind(this);
+        // mozemo i bez ovoga ako ne kreiramo handleClick na prototype nego kao instancu klase
+
+        /*
+        handleClick() {
+            this.setState(({count}) => ({
+                count: count + 1,
+            }))
+        }
+
+        // Znaci kao instancu klase ovako
+        handleClick = function () {
+            this.setState(({count}) => ({
+                count: count + 1,
+            }))
+        }.bind(this);
+        */
+
+        //ili jos lakse ako koristimo arrow function, i onda nam ne treba bind(this)
+        handleClick = () => {
+            this.setState(({count}) => ({
+                count: count + 1,
+            }))
+        };
+
+        render() {
+            return (
+                <button
+                    className="buttonStyles"
+                    onClick={this.handleClick}
+                >
+                    {this.state.count}
+                </button>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Counter/>,
+        rootElement
+    )
+
+</script>
+</body>
+</html>
