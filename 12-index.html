@@ -69,19 +69,32 @@
 
         //ili jos lakse ako koristimo arrow function, i onda nam ne treba bind(this)
         handleClick = () => {
-            this.setState(({count}) => ({
-                count: count + 1,
-            }))
+            // this.setState(({count}) => ({
+            //     count: count + 1,
+            // }))
+
+            // jos prostije posto je {count} isto sto i this.state.count
+            this.setState({
+                count: this.state.count + 1,
+            })
+        };
+
+        handleClickReset = () => {
+            this.setState({
+                count: 0,
+            })
         };
 
         render() {
             return (
-                <button
-                    className="buttonStyles"
-                    onClick={this.handleClick}
-                >
-                    {this.state.count}
-                </button>
+                <div className="divStyles">
+                    <button className="buttonStyles" onClick={this.handleClick}>
+                        {this.state.count}
+                    </button>
+                    <button className="buttonStyles" onClick={this.handleClickReset}>
+                        Reset
+                    </button>
+                </div>
             )
         }
     }

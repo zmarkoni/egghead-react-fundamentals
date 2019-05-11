@@ -68,6 +68,9 @@
             )
         }
 
+        // we need componentWillUnmount for every async stuff!!!
+        // explained => https://www.youtube.com/watch?v=8BNdxFzMeVg
+        // example https://codesandbox.io/s/nwwrrpvqw4
         componentWillUnmount() {
           clearInterval(this.timer)
         }

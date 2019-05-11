@@ -12,10 +12,12 @@
     <script type="text/babel">
       //Lecture 4 - Create simple reusable component
 
-      const rootElement = document.getElementById('root')
-      const helloWorld = <div>Hello World</div>
-      const message = (props) => <div>{props.msg}</div>
-      const Message1 = (props) => <div>{props.children}</div>
+      const rootElement = document.getElementById('root');
+      const helloWorld = <div>Hello World</div>;
+      const message = (props) => (<div>{props.msg}</div>);
+
+      // Create new component as function, MORA VELIKO SLOVO
+      const Message1 = (props) => (<div>{props.children}</div>);
       const element = (
           <div className="container">
               {helloWorld}
@@ -27,8 +29,8 @@
       )
 
       // Best way
-      // Create new component as function
-      const Message2 = (props) => <div>{props.children}</div>
+      // Create new component as function, MORA VELIKO SLOVO
+      const Message2 = (props) => (<div>{props.children}</div>);
 
       const element2 = (
           <Message2>
