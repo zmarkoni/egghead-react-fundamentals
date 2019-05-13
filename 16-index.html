@@ -33,7 +33,7 @@
             multiSelect: []
         }
 
-        handleCommaSeparatedChange = event => {
+        handleCommaSeparatedChange = (event) => {
             //console.log('handleCommaSeparatedChange')
             //console.log(event.target.value);
             //const value1 = event.target.value; ovo je isto sto i ovo dole
@@ -47,7 +47,8 @@
                 multiSelect: allValues.filter(v => MyFancyForm.availableOptions.includes(v))  // ovako mozemo da pristupimo statickim varijablama MyFancyForm.availableOptions
             })
         }
-        handleMultilineChange = event => {
+
+        handleMultilineChange = (event) => {
             //console.log('handleMultilineChanged')
             //console.log(event.target.value);
             const {value} = event.target;
@@ -62,9 +63,13 @@
 
         }
 
-        handleMultiSelectChange = event => {
+        handleMultiSelectChange = (event) => {
             //console.log('handleMultiSelectChanged')
-            const allValues = Array.from(event.target.selectedOptions).map(o => o.value);
+            // event.target.selectedOptions is built in stuff and return HTMLCollection [option] which we need to convert in Array so we can work with
+            // https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+            // const allValues = [...event.target.selectedOptions]; // ili
+            // const allValues = Array.from(event.target.selectedOptions);
+            const allValues = Array.from(event.target.selectedOptions).map(option => option.value);
             //console.log(allValues);
             this.setState({
                 multiSelect: allValues,

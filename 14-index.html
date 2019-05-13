@@ -19,15 +19,13 @@
     const rootElement = document.getElementById('root');
 
     class NameForm extends React.Component {
-        handleSubmit = event => {
-            event.preventDefault()
-            console.log({target: event.target})
-            console.log(event.target[0].value) // JS
-            console.log(
-                event.target.elements.username.value, // JS using name of input
-            )
-            console.log(this.inputNode.value) // pure React using ref
-        }
+        handleSubmit = (event) => {
+            event.preventDefault();
+            console.log({target: event.target});
+            console.log(event.target[0].value); // JS
+            console.log(event.target.elements.username.value); // JS using name of input
+            console.log(this.inputNode.value); // pure React using ref, no need for event
+        };
 
         render() {
             return (
@@ -37,9 +35,7 @@
                         <input
                             type="text"
                             name="username"
-                            ref={node => {
-                                this.inputNode = node
-                            }}
+                            ref={node => {this.inputNode = node}}
                         />
                     </label>
                     <button type="submit">Submit</button>
